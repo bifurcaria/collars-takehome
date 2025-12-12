@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { Link } from 'expo-router';
-import { Movie } from '../types/tmdb';
+import React from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import Colors from '../constants/Colors';
+import { Movie } from '../types/tmdb';
 import { useColorScheme } from './useColorScheme';
 
 const TMDB_IMAGE_BASE_URL = process.env.EXPO_PUBLIC_TMDB_IMAGE_BASE_URL;
