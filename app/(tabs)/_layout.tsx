@@ -1,8 +1,10 @@
-import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
+import { Icon, Label, NativeTabs, VectorIcon } from 'expo-router/unstable-native-tabs';
 import React from 'react';
+import { Platform } from 'react-native';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
+import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -14,13 +16,22 @@ export default function TabLayout() {
       backgroundColor={theme.background}
     >
       <NativeTabs.Trigger name="index" options={{ title: 'Movies' }}>
-         <Icon sf="film" />
+      {Platform.select({
+          ios: <Icon sf="film" />,
+          android: <Icon src={<VectorIcon family={MaterialIcons} name="movie" />} />,
+        })}
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="saved" options={{ title: 'Saved' }}>
-         <Icon sf="heart" />
+        {Platform.select({
+          ios: <Icon sf="heart" />,
+          android: <Icon src={<VectorIcon family={MaterialIcons} name="favorite" />} />,
+        })}
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="search" role="search">
-        <Label>Search</Label>
+      <NativeTabs.Trigger name="search" role="search" options={{ title: 'Search' }} >
+        {Platform.select({
+          ios: <Label>Search</Label>,
+          android: <Icon src={<VectorIcon family={MaterialIcons} name="search" />} />,
+        })}
       </NativeTabs.Trigger>
     </NativeTabs>
   );
