@@ -1,9 +1,14 @@
 import { Stack } from 'expo-router';
 import React from 'react';
+import { Platform } from 'react-native';
 
 export default function MoviesLayout() {
   return (
-    <Stack screenOptions={{ headerLargeTitle: true, headerTransparent: true}}>
+    <Stack screenOptions={{ 
+      headerLargeTitle: true, 
+      headerTransparent: Platform.select({ ios: true, default: false }),
+      headerBlurEffect: 'regular',
+    }}>
       <Stack.Screen name="index" options={{ title: 'Movies' }} />
     </Stack>
   );
