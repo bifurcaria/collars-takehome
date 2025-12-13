@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 
 export default function SavedLayout() {
   return (
-    <Stack screenOptions={{ headerLargeTitle: true, headerTransparent: Platform.select({ ios: true, default: false }), headerBlurEffect: 'regular' }}>
+    <Stack screenOptions={{ headerLargeTitle: true, headerTransparent: Platform.select({ ios: true, default: false }) }}>
       <Stack.Screen name="index" options={{ title: 'Saved' }} />
     </Stack>
   );

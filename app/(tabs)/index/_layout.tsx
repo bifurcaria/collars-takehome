@@ -7,7 +7,6 @@ export default function MoviesLayout() {
     <Stack screenOptions={{ 
       headerLargeTitle: true, 
       headerTransparent: Platform.select({ ios: true, default: false }),
-      headerBlurEffect: 'regular',
     }}>
       <Stack.Screen name="index" options={{ title: 'Movies' }} />
     </Stack>
