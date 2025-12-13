@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { getPopularMovies, getUpcomingMovies } from '@/api/tmdb';
+import { FilterHeader } from '@/components/FilterHeader';
 import { MovieListItem } from '@/components/MovieListItem';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
@@ -19,39 +20,6 @@ export default function MoviesScreen() {
     queryKey: ['movies', filter],
     queryFn: () => filter === 'popular' ? getPopularMovies() : getUpcomingMovies(),
   });
-
-  const renderHeader = () => (
-    <View style={[styles.header, { backgroundColor: theme.background }]}>
-      <View style={styles.filterContainer}>
-        <Pressable
-          onPress={() => setFilter('popular')}
-          style={[
-            styles.filterButton,
-            filter === 'popular' && { backgroundColor: theme.tint },
-            { borderColor: theme.tint }
-          ]}
-        >
-          <Text style={[
-            styles.filterText, 
-            { color: filter === 'popular' ? '#fff' : theme.text }
-          ]}>Popular</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => setFilter('upcoming')}
-          style={[
-            styles.filterButton,
-            filter === 'upcoming' && { backgroundColor: theme.tint },
-            { borderColor: theme.tint }
-          ]}
-        >
-          <Text style={[
-            styles.filterText, 
-            { color: filter === 'upcoming' ? '#fff' : theme.text }
-          ]}>Upcoming</Text>
-        </Pressable>
-      </View>
-    </View>
-  );
 
   if (isLoading && !data) {
     return (
@@ -76,6 +44,13 @@ export default function MoviesScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <MovieListItem movie={item} />}
         contentContainerStyle={styles.listContent}
+        ListHeaderComponent={
+          <FilterHeader 
+            filter={filter} 
+            setFilter={setFilter} 
+            colorScheme={colorScheme}
+          />
+        }
         ListEmptyComponent={
             <View style={styles.centered}>
                 <Text style={{ color: theme.text, marginTop: 20 }}>No movies found</Text>
@@ -92,24 +67,6 @@ const styles = StyleSheet.create({
   centered: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  header: {
-    padding: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ccc',
-  },
-  filterContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  filterButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    borderWidth: 1,
-  },
-  filterText: {
-    fontWeight: '600',
   },
   listContent: {
     paddingBottom: 20,
