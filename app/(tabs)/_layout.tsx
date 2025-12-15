@@ -14,6 +14,8 @@ export default function TabLayout() {
     <NativeTabs
       tintColor={theme.tint}
       backgroundColor={theme.background}
+      indicatorColor={"transparent"}
+      labelVisibilityMode={Platform.OS === 'android' ? 'labeled' : undefined}
     >
       <NativeTabs.Trigger name="index" options={{ title: 'Movies' }}>
       {Platform.select({
