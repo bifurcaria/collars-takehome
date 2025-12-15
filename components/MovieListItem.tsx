@@ -26,10 +26,12 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
               style={styles.image}
             />
             <View style={styles.info}>
-              <Typography style={styles.title} type="subtitle">{movie.title}</Typography>
+                <View style={styles.titleContainer}>
+              <Typography style={styles.title} type="defaultSemiBold">{movie.title}</Typography>
               <Typography style={styles.date}>
-                {new Date(movie.release_date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                {new Date(movie.release_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
               </Typography>
+              </View>
               <Typography numberOfLines={3} style={styles.overview}>
                 {movie.overview}
               </Typography>
@@ -47,6 +49,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#ccc',
+    gap: 10,
+    alignItems: 'center',
   },
   image: {
     width: 80,
@@ -56,20 +60,23 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 1,
-    marginLeft: 10,
     justifyContent: 'flex-start',
+    gap: 4,
   },
   title: {
     fontSize: 16,
-    marginBottom: 4,
+    flex: 1,
+    textOverflow: 'ellipsis'
+  },
+  titleContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   date: {
     fontSize: 12,
-    marginBottom: 4,
-    opacity: 0.8,
   },
   overview: {
     fontSize: 14,
-    opacity: 0.8,
   },
 });

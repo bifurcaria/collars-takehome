@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { ActivityIndicator, Alert, Button, Image, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { getMovieDetails } from '@/api/tmdb';
 import { Typography } from '@/components/Typography';
@@ -59,54 +59,56 @@ export default function MovieDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: movie.title, headerBackTitle: 'Movies' }} />
-      <ScrollView style={[styles.container, { backgroundColor: theme.background }]}>
-        <Image
-          source={{ uri: movie.backdrop_path ? `${TMDB_IMAGE_BASE_URL}${movie.backdrop_path}` : `${TMDB_IMAGE_BASE_URL}${movie.poster_path}` }}
-          style={styles.backdrop}
-          resizeMode="cover"
-        />
+      <View style={[styles.container, { backgroundColor: theme.background }]}>
+        <ScrollView style={styles.scrollContainer}>
+          <Image
+            source={{ uri: movie.backdrop_path ? `${TMDB_IMAGE_BASE_URL}${movie.backdrop_path}` : `${TMDB_IMAGE_BASE_URL}${movie.poster_path}` }}
+            style={styles.backdrop}
+            resizeMode="cover"
+          />
+          <View style={styles.content}>
+            <Typography type="title">{movie.title}</Typography>
+            <View style={styles.metaRow}>
+              <Typography style={styles.metaText}>
+                {new Date(movie.release_date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+              </Typography>
+              <Typography style={styles.metaText}>
+                 • {movie.runtime} min
+              </Typography>
+              <Typography style={styles.metaText}>
+                 • {movie.vote_average.toFixed(1)}/10
+              </Typography>
+            </View>
 
-        <View style={styles.content}>
-          <Typography type="title">{movie.title}</Typography>
-          
-          <View style={styles.metaRow}>
-            <Typography style={styles.metaText}>
-              {new Date(movie.release_date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
-            </Typography>
-            <Typography style={styles.metaText}>
-               • {movie.runtime} min
-            </Typography>
-            <Typography style={styles.metaText}>
-               • {movie.vote_average.toFixed(1)}/10
-            </Typography>
+            <View style={styles.genres}>
+               {movie.genres.map(g => (
+                   <View key={g.id} style={[styles.genreTag, { borderColor: theme.text }]}>
+                       <Typography>{g.name}</Typography>
+                   </View>
+               ))}
+            </View>
+            <Typography type="defaultSemiBold">Overview</Typography>
+            <Typography>{movie.overview}</Typography>      
           </View>
-
-          <View style={styles.genres}>
-             {movie.genres.map(g => (
-                 <View key={g.id} style={[styles.genreTag, { borderColor: theme.text }]}>
-                     <Typography style={styles.genreText}>{g.name}</Typography>
-                 </View>
-             ))}
-          </View>
-
-          <View style={styles.actions}>
-              <Button 
-                title={isMovieSaved ? "Remove from Saved" : "Save Movie"} 
-                onPress={handleToggleSave}
-                color={isMovieSaved ? 'red' : theme.tint}
-              />
-          </View>
-
-          <Typography type="subtitle" style={styles.sectionTitle}>Overview</Typography>
-          <Typography style={styles.overview}>{movie.overview}</Typography>
+        </ScrollView>
+        <View style={[styles.footer, { backgroundColor: theme.background }]}>
+          <Pressable
+            onPress={handleToggleSave}
+            style={[styles.button, { backgroundColor: isMovieSaved ? theme.tint : theme.tint }]}
+          >
+            <Typography type="defaultSemiBold" style={{ color: theme.background }}>{isMovieSaved ? "Remove from Saved" : "Save Movie"}</Typography>
+          </Pressable>
         </View>
-      </ScrollView>
+      </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  scrollContainer: {
     flex: 1,
   },
   centered: {
@@ -119,10 +121,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
+    gap: 12,
   },
   metaRow: {
     flexDirection: 'row',
-    marginBottom: 12,
   },
   metaText: {
     opacity: 0.8,
@@ -131,26 +133,25 @@ const styles = StyleSheet.create({
   genres: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 16,
   },
   genreTag: {
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: 80,
     paddingHorizontal: 10,
     paddingVertical: 4,
     marginRight: 8,
     marginBottom: 8,
   },
-  genreText: {
-    fontSize: 12,
+  footer: {
+    padding: 16,
+    paddingBottom: 32,
+    borderTopColor: '#ccc',
   },
-  actions: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    marginBottom: 8,
-  },
-  overview: {
-    opacity: 0.9,
+  button: {
+    opacity: 0.95,
+    padding: 16,
+    borderRadius: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
