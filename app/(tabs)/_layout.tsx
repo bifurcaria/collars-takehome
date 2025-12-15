@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
+import { Typography } from '@/constants/Typography';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 
 export default function TabLayout() {
@@ -16,6 +17,10 @@ export default function TabLayout() {
       backgroundColor={theme.background}
       indicatorColor={"transparent"}
       labelVisibilityMode={Platform.OS === 'android' ? 'labeled' : undefined}
+      labelStyle={{
+        fontFamily: Typography.title,
+        fontSize: 12,
+      }}
     >
       <NativeTabs.Trigger name="index" options={{ title: 'Movies' }}>
       {Platform.select({
