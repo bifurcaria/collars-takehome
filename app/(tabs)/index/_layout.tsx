@@ -10,10 +10,12 @@ export default function MoviesLayout() {
       headerTransparent: Platform.select({ ios: true, default: false }),
       headerTitleStyle: {
         fontFamily: Typography.title,
+        fontSize: Platform.select({ android: 42, default: undefined }),
       },
       headerLargeTitleStyle: {
         fontFamily: Typography.titleItalic,
       },
+      headerShadowVisible: false,
     }}>
       <Stack.Screen name="index" options={{ title: 'Movies' }} />
     </Stack>
