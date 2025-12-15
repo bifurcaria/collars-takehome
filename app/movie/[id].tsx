@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { ActivityIndicator, Alert, Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Button, Image, ScrollView, StyleSheet, View } from 'react-native';
 
 import { getMovieDetails } from '@/api/tmdb';
+import { Typography } from '@/components/Typography';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 import { useSavedMovies } from '@/hooks/useSavedMovies';
@@ -50,7 +51,7 @@ export default function MovieDetailScreen() {
   if (error || !movie) {
     return (
       <View style={[styles.centered, { backgroundColor: theme.background, flex: 1 }]}>
-        <Text style={{ color: theme.text }}>Error loading movie details</Text>
+        <Typography>Error loading movie details</Typography>
       </View>
     );
   }
@@ -66,24 +67,24 @@ export default function MovieDetailScreen() {
         />
 
         <View style={styles.content}>
-          <Text style={[styles.title, { color: theme.text }]}>{movie.title}</Text>
+          <Typography type="title">{movie.title}</Typography>
           
           <View style={styles.metaRow}>
-            <Text style={[styles.metaText, { color: theme.text }]}>
+            <Typography style={styles.metaText}>
               {new Date(movie.release_date).getFullYear()}
-            </Text>
-            <Text style={[styles.metaText, { color: theme.text }]}>
+            </Typography>
+            <Typography style={styles.metaText}>
                • {movie.runtime} min
-            </Text>
-            <Text style={[styles.metaText, { color: theme.text }]}>
+            </Typography>
+            <Typography style={styles.metaText}>
                • {movie.vote_average.toFixed(1)}/10
-            </Text>
+            </Typography>
           </View>
 
           <View style={styles.genres}>
              {movie.genres.map(g => (
                  <View key={g.id} style={[styles.genreTag, { borderColor: theme.text }]}>
-                     <Text style={[styles.genreText, { color: theme.text }]}>{g.name}</Text>
+                     <Typography style={styles.genreText}>{g.name}</Typography>
                  </View>
              ))}
           </View>
@@ -96,8 +97,8 @@ export default function MovieDetailScreen() {
               />
           </View>
 
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Overview</Text>
-          <Text style={[styles.overview, { color: theme.text }]}>{movie.overview}</Text>
+          <Typography type="subtitle" style={styles.sectionTitle}>Overview</Typography>
+          <Typography style={styles.overview}>{movie.overview}</Typography>
         </View>
       </ScrollView>
     </>
@@ -119,17 +120,11 @@ const styles = StyleSheet.create({
   content: {
     padding: 16,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
   metaRow: {
     flexDirection: 'row',
     marginBottom: 12,
   },
   metaText: {
-    fontSize: 14,
     opacity: 0.8,
     marginRight: 4,
   },
@@ -153,13 +148,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
     marginBottom: 8,
   },
   overview: {
-    fontSize: 16,
-    lineHeight: 24,
     opacity: 0.9,
   },
 });

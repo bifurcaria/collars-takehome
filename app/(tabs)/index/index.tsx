@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
 import { getPopularMovies, getUpcomingMovies } from '@/api/tmdb';
 import { FilterHeader } from '@/components/FilterHeader';
 import { MovieListItem } from '@/components/MovieListItem';
+import { Typography } from '@/components/Typography';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 
@@ -32,7 +33,7 @@ export default function MoviesScreen() {
   if (error) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: theme.background }]}>
-        <Text style={{ color: theme.text }}>Error loading movies</Text>
+        <Typography>Error loading movies</Typography>
       </View>
     );
   }
@@ -53,7 +54,7 @@ export default function MoviesScreen() {
         }
         ListEmptyComponent={
             <View style={styles.centered}>
-                <Text style={{ color: theme.text, marginTop: 20 }}>No movies found</Text>
+                <Typography style={{ marginTop: 20 }}>No movies found</Typography>
             </View>
         }
       />

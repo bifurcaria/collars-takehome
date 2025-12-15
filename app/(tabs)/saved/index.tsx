@@ -1,7 +1,8 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import { MovieListItem } from '@/components/MovieListItem';
+import { Typography } from '@/components/Typography';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 import { useSavedMovies } from '@/hooks/useSavedMovies';
@@ -14,7 +15,7 @@ export default function SavedScreen() {
   if (isLoading) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: theme.background }]}>
-        <Text style={{ color: theme.text }}>Loading...</Text>
+        <Typography>Loading...</Typography>
       </View>
     );
   }
@@ -28,7 +29,7 @@ export default function SavedScreen() {
         contentContainerStyle={styles.listContent}
         ListEmptyComponent={
           <View style={styles.centered}>
-            <Text style={{ color: theme.text, marginTop: 20 }}>No saved movies yet.</Text>
+            <Typography style={{ marginTop: 20 }}>No saved movies yet.</Typography>
           </View>
         }
       />

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
 import { searchMovies } from '@/api/tmdb';
 import { MovieListItem } from '@/components/MovieListItem';
+import { Typography } from '@/components/Typography';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 
@@ -25,11 +26,11 @@ export default function SearchScreen() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['movies', 'search', query],
-    queryFn: () => {
+    queryFn: async () => {
       if (query.length > 0) {
         return searchMovies(query);
       }
-      return { results: [] };
+      return { results: [], page: 1, total_pages: 0, total_results: 0 };
     },
     enabled: query.length > 0,
   });
@@ -45,7 +46,7 @@ export default function SearchScreen() {
   if (error) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: theme.background }]}>
-        <Text style={{ color: theme.text }}>Error searching movies</Text>
+        <Typography>Error searching movies</Typography>
       </View>
     );
   }
@@ -60,9 +61,9 @@ export default function SearchScreen() {
         contentInsetAdjustmentBehavior="automatic"
         ListEmptyComponent={
           <View style={styles.centered}>
-            <Text style={{ color: theme.text, marginTop: 20 }}>
+            <Typography style={{ marginTop: 20 }}>
               {query.length > 0 ? "No movies found" : "Search for movies"}
-            </Text>
+            </Typography>
           </View>
         }
       />
