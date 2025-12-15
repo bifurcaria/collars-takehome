@@ -13,13 +13,13 @@ export const Typography = {
   }),
   title: Platform.select({
     ios: 'System',
-    android: 'InstrumentSerif_400Regular',
-    default: 'InstrumentSerif_400Regular',
+    android: 'DMSerifText_400Regular',
+    default: 'DMSerifText_400Regular',
   }),
   titleItalic: Platform.select({
     ios: 'System',
-    android: 'InstrumentSerif_400Regular_Italic',
-    default: 'InstrumentSerif_400Regular_Italic',
+    android: 'DMSerifText_400Regular_Italic',
+    default: 'DMSerifText_400Regular_Italic',
   }),
 };
 

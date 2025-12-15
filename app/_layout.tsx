@@ -1,11 +1,11 @@
 import {
+  DMSerifText_400Regular,
+  DMSerifText_400Regular_Italic,
+} from '@expo-google-fonts/dm-serif-text';
+import {
   InstrumentSans_400Regular,
   InstrumentSans_700Bold,
 } from '@expo-google-fonts/instrument-sans';
-import {
-  InstrumentSerif_400Regular,
-  InstrumentSerif_400Regular_Italic,
-} from '@expo-google-fonts/instrument-serif';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -37,8 +37,8 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     InstrumentSans_400Regular,
     InstrumentSans_700Bold,
-    InstrumentSerif_400Regular,
-    InstrumentSerif_400Regular_Italic,
+    DMSerifText_400Regular,
+    DMSerifText_400Regular_Italic,
     ...FontAwesome.font,
   });
 
