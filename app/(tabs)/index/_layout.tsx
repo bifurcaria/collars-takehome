@@ -1,3 +1,4 @@
+
 import { Typography } from '@/constants/Typography';
 import { Stack } from 'expo-router';
 import React from 'react';
@@ -9,7 +10,7 @@ export default function MoviesLayout() {
       headerLargeTitle: true, 
       headerTransparent: Platform.select({ ios: true, default: false }),
       headerTitleStyle: {
-        fontFamily: Typography.title,
+        fontFamily: Platform.select({ ios: 'System', android: Typography.title, default: Typography.title }),
         fontSize: Platform.select({ android: 42, default: undefined }),
       },
       headerLargeTitleStyle: {
