@@ -28,7 +28,7 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
             <View style={styles.info}>
               <Typography style={styles.title} type="subtitle">{movie.title}</Typography>
               <Typography style={styles.date}>
-                {new Date(movie.release_date).toLocaleDateString()}
+                {new Date(movie.release_date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
               </Typography>
               <Typography numberOfLines={3} style={styles.overview}>
                 {movie.overview}

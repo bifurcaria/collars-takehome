@@ -71,7 +71,7 @@ export default function MovieDetailScreen() {
           
           <View style={styles.metaRow}>
             <Typography style={styles.metaText}>
-              {new Date(movie.release_date).getFullYear()}
+              {new Date(movie.release_date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
             </Typography>
             <Typography style={styles.metaText}>
                • {movie.runtime} min
