@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     lineHeight: 32,
-    fontFamily: FontTypography.title,
+    fontFamily: FontTypography.bodyBold,
   },
   subtitle: {
     fontSize: 20,
-    fontFamily: FontTypography.title,
+    fontFamily: FontTypography.body,
   },
   link: {
     lineHeight: 30,
