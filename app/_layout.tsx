@@ -4,7 +4,7 @@ import {
 } from '@expo-google-fonts/dm-serif-text';
 import {
   InstrumentSans_400Regular,
-  InstrumentSans_700Bold,
+  InstrumentSans_600SemiBold,
 } from '@expo-google-fonts/instrument-sans';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
@@ -36,7 +36,7 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     InstrumentSans_400Regular,
-    InstrumentSans_700Bold,
+    InstrumentSans_600SemiBold,
     DMSerifText_400Regular,
     DMSerifText_400Regular_Italic,
     ...FontAwesome.font,

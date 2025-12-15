@@ -8,16 +8,16 @@ export const Typography = {
   }),
   bodyBold: Platform.select({
     ios: 'System', // Weight handled by fontWeight
-    android: 'InstrumentSans_700Bold',
-    default: 'InstrumentSans_700Bold',
+    android: 'InstrumentSans_600SemiBold',
+    default: 'InstrumentSans_600SemiBold',
   }),
   title: Platform.select({
-    ios: 'System',
+    ios: 'DMSerifText_400Regular',
     android: 'DMSerifText_400Regular',
     default: 'DMSerifText_400Regular',
   }),
   titleItalic: Platform.select({
-    ios: 'System',
+    ios: 'DMSerifText_400Regular',
     android: 'DMSerifText_400Regular_Italic',
     default: 'DMSerifText_400Regular_Italic',
   }),
