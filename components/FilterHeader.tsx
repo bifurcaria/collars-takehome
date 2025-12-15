@@ -14,7 +14,41 @@ interface FilterHeaderProps {
 
 export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderProps) {
   const theme = Colors[colorScheme ?? 'light'];
-  const trackColor = colorScheme === 'dark' ? '#333' : '#e5e5e5';
+
+  if (Platform.OS === 'ios') {
+    return (
+      <View style={[styles.header, { backgroundColor: Platform.select({ default: theme.background }) }]}>
+        <View style={styles.filterContainer}>
+          <Pressable
+            onPress={() => setFilter('popular')}
+            style={[
+              styles.iosFilterButton,
+              filter === 'popular' && { backgroundColor: theme.text },
+              filter !== 'popular' && { backgroundColor: colorScheme === 'dark' ? '#333' : '#f0f0f0' }
+            ]}
+          >
+            <Typography style={[
+              styles.filterText,
+              { color: filter === 'popular' ? theme.background : theme.text }
+            ]}>Popular</Typography>
+          </Pressable>
+          <Pressable
+            onPress={() => setFilter('upcoming')}
+            style={[
+              styles.iosFilterButton,
+              filter === 'upcoming' && { backgroundColor: theme.text },
+              filter !== 'upcoming' && { backgroundColor: colorScheme === 'dark' ? '#333' : '#f0f0f0' }
+            ]}
+          >
+            <Typography style={[
+              styles.filterText,
+              { color: filter === 'upcoming' ? theme.background : theme.text }
+            ]}>Upcoming</Typography>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.header, { backgroundColor: Platform.select({ ios: 'transparent', default: theme.background }) }]}>
@@ -50,7 +84,7 @@ export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderPro
 
 const styles = StyleSheet.create({
   header: {
-    padding: 16,
+    padding: Platform.select({ ios: 12, default: 0 }),
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#ccc',
   },
@@ -68,6 +102,14 @@ const styles = StyleSheet.create({
     fontFamily: FontTypography.bodyBold,
     fontWeight: '600',
     fontSize: 14,
+  },
+  iosFilterButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    borderRadius: 30,
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
