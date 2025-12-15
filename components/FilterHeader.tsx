@@ -1,6 +1,8 @@
 import Colors from '@/constants/Colors';
+import { Typography as FontTypography } from '@/constants/Typography';
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { Typography } from './Typography';
 
 type FilterType = 'popular' | 'upcoming';
 
@@ -24,10 +26,10 @@ export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderPro
             { borderColor: theme.tint }
           ]}
         >
-          <Text style={[
+          <Typography style={[
             styles.filterText, 
             { color: filter === 'popular' ? '#fff' : theme.text }
-          ]}>Popular</Text>
+          ]}>Popular</Typography>
         </Pressable>
         <Pressable
           onPress={() => setFilter('upcoming')}
@@ -37,10 +39,10 @@ export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderPro
             { borderColor: theme.tint }
           ]}
         >
-          <Text style={[
+          <Typography style={[
             styles.filterText, 
             { color: filter === 'upcoming' ? '#fff' : theme.text }
-          ]}>Upcoming</Text>
+          ]}>Upcoming</Typography>
         </Pressable>
       </View>
     </View>
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   filterText: {
+    fontFamily: FontTypography.bodyBold,
     fontWeight: '600',
   },
 });

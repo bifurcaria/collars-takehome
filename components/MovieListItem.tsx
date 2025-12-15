@@ -1,8 +1,9 @@
 import { Link } from 'expo-router';
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 import Colors from '../constants/Colors';
 import { Movie } from '../types/tmdb';
+import { Typography } from './Typography';
 import { useColorScheme } from './useColorScheme';
 
 const TMDB_IMAGE_BASE_URL = process.env.EXPO_PUBLIC_TMDB_IMAGE_BASE_URL;
@@ -25,13 +26,13 @@ export const MovieListItem = ({ movie }: MovieListItemProps) => {
               style={styles.image}
             />
             <View style={styles.info}>
-              <Text style={[styles.title, { color: theme.text }]}>{movie.title}</Text>
-              <Text style={[styles.date, { color: theme.text }]}>
+              <Typography style={styles.title} type="subtitle">{movie.title}</Typography>
+              <Typography style={styles.date}>
                 {new Date(movie.release_date).toLocaleDateString()}
-              </Text>
-              <Text numberOfLines={3} style={[styles.overview, { color: theme.text }]}>
+              </Typography>
+              <Typography numberOfLines={3} style={styles.overview}>
                 {movie.overview}
-              </Text>
+              </Typography>
             </View>
           </View>
         )}
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
     marginBottom: 4,
   },
   date: {
@@ -73,5 +73,3 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
 });
-
-
