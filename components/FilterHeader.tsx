@@ -14,34 +14,33 @@ interface FilterHeaderProps {
 
 export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderProps) {
   const theme = Colors[colorScheme ?? 'light'];
+  const trackColor = colorScheme === 'dark' ? '#333' : '#e5e5e5';
 
   return (
     <View style={[styles.header, { backgroundColor: theme.background }]}>
-      <View style={styles.filterContainer}>
+      <View style={[styles.filterContainer, { backgroundColor: trackColor }]}>
         <Pressable
           onPress={() => setFilter('popular')}
           style={[
             styles.filterButton,
-            filter === 'popular' && { backgroundColor: theme.tint },
-            { borderColor: theme.tint }
+            filter === 'popular' && { backgroundColor: theme.background, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } },
           ]}
         >
           <Typography style={[
             styles.filterText, 
-            { color: filter === 'popular' ? '#fff' : theme.text }
+            { color: theme.text, opacity: filter === 'popular' ? 1 : 0.6 }
           ]}>Popular</Typography>
         </Pressable>
         <Pressable
           onPress={() => setFilter('upcoming')}
           style={[
             styles.filterButton,
-            filter === 'upcoming' && { backgroundColor: theme.tint },
-            { borderColor: theme.tint }
+            filter === 'upcoming' && { backgroundColor: theme.background, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } },
           ]}
         >
           <Typography style={[
             styles.filterText, 
-            { color: filter === 'upcoming' ? '#fff' : theme.text }
+            { color: theme.text, opacity: filter === 'upcoming' ? 1 : 0.6 }
           ]}>Upcoming</Typography>
         </Pressable>
       </View>
@@ -51,23 +50,25 @@ export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderPro
 
 const styles = StyleSheet.create({
   header: {
-    padding: 10,
+    padding: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#ccc',
   },
   filterContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    borderRadius: 32,
+    padding: 4,
   },
   filterButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    borderWidth: 1,
+    flex: 1,
+    paddingVertical: 8,
+    alignItems: 'center',
+    borderRadius: 32,
   },
   filterText: {
     fontFamily: FontTypography.bodyBold,
     fontWeight: '600',
+    fontSize: 14,
   },
 });
 
