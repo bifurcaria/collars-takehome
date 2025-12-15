@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
 import { Typography as FontTypography } from '@/constants/Typography';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, View } from 'react-native';
 import { Typography } from './Typography';
 
 type FilterType = 'popular' | 'upcoming';
@@ -17,13 +17,13 @@ export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderPro
   const trackColor = colorScheme === 'dark' ? '#333' : '#e5e5e5';
 
   return (
-    <View style={[styles.header, { backgroundColor: theme.background }]}>
-      <View style={[styles.filterContainer, { backgroundColor: trackColor }]}>
+    <View style={[styles.header, { backgroundColor: Platform.select({ ios: 'transparent', default: theme.background }) }]}>
+      <View style={styles.filterContainer}>
         <Pressable
           onPress={() => setFilter('popular')}
           style={[
             styles.filterButton,
-            filter === 'popular' && { backgroundColor: theme.background, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } },
+            filter === 'popular' && { borderBottomColor: theme.text, borderBottomWidth: 2 },
           ]}
         >
           <Typography style={[
@@ -35,7 +35,7 @@ export function FilterHeader({ filter, setFilter, colorScheme }: FilterHeaderPro
           onPress={() => setFilter('upcoming')}
           style={[
             styles.filterButton,
-            filter === 'upcoming' && { backgroundColor: theme.background, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 2, shadowOffset: { width: 0, height: 1 } },
+            filter === 'upcoming' && { borderBottomColor: theme.text, borderBottomWidth: 2 },
           ]}
         >
           <Typography style={[
@@ -56,14 +56,13 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     flexDirection: 'row',
-    borderRadius: 32,
-    padding: 4,
   },
   filterButton: {
     flex: 1,
-    paddingVertical: 8,
+    paddingVertical: 12,
     alignItems: 'center',
-    borderRadius: 32,
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
   },
   filterText: {
     fontFamily: FontTypography.bodyBold,
